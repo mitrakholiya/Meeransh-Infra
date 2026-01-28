@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
+import useContact from '../../../hooks/useContact';
 
 const Estimate = () => {
     const cities = ["Surat", "Bharuch", "Ankleshwar", "Navsari"];
+
+    const { PostEstimate } = useContact()
+
 
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState("");
@@ -15,22 +19,31 @@ const Estimate = () => {
         city: "",
         message: "",
     })
-const handleSubmit = async (e) => {
-  e.preventDefault();
+    const handleSubmit = async () => {
 
-  const formData = new FormData();
-  formData.append("name", name);
-  formData.append("email", email);
-  formData.append("phone", phone);
-  formData.append("city", city);
-  formData.append("message", message);
-  formData.append("file", file); // 👈 must match multer
 
-  await fetch("http://localhost:5000/api/estimate", {
-    method: "POST",
-    body: formData,
-  });
-};
+        const formData = new FormData();
+        formData.append("name", form.name);
+        formData.append("email", form.email);
+        formData.append("phone", form.phone);
+        formData.append("city", value);
+        formData.append("message", form.message);
+        formData.append("file", file); 
+        console.log(formData);
+
+        const res = await PostEstimate(formData)
+        if (res?.success) {
+            setForm({
+                name: "",
+                email: "",
+                phone: "",
+                city: "",
+                message: "",
+            })
+            setValue("")
+            setFile(null)
+        }
+    };
 
 
     return (
@@ -169,7 +182,7 @@ const handleSubmit = async (e) => {
                         </p>
 
                         <button className='w-full py-[8px] bg-blue-400 font-bold sm:text-[22px] text-white rounded-[20px]'
-                            onClick={(e) => handleSubmit}
+                            onClick={handleSubmit}
                         >
                             Join Now
                         </button>
