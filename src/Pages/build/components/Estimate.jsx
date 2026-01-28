@@ -8,6 +8,31 @@ const Estimate = () => {
     const [file, setFile] = useState(null);
     const [dragActive, setDragActive] = useState(false);
 
+    const [form, setForm] = useState({
+        name: "",
+        email: "",
+        phone: "",
+        city: "",
+        message: "",
+    })
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  const formData = new FormData();
+  formData.append("name", name);
+  formData.append("email", email);
+  formData.append("phone", phone);
+  formData.append("city", city);
+  formData.append("message", message);
+  formData.append("file", file); // 👈 must match multer
+
+  await fetch("http://localhost:5000/api/estimate", {
+    method: "POST",
+    body: formData,
+  });
+};
+
+
     return (
         <>
             <div className="container mx-auto lg:px-[20%] md:px-[15%] sm:px-[10%] px-[5%] py-[100px]">
@@ -21,6 +46,8 @@ const Estimate = () => {
                         {/* Name */}
                         <input
                             type="text"
+                            value={form.name}
+                            onChange={(e) => setForm({ ...form, name: e.target.value })}
                             placeholder="Enter Your Name"
                             className="text-[14px] sm:text-[16px] py-[8px] px-[20px]
                             border border-gray-300 rounded-[10px]
@@ -31,6 +58,8 @@ const Estimate = () => {
                         {/* Email */}
                         <input
                             type="text"
+                            value={form.email}
+                            onChange={(e) => setForm({ ...form, email: e.target.value })}
                             placeholder="Enter Your Email"
                             className="text-[14px] sm:text-[16px] py-[8px] px-[20px]
                             border border-gray-300 rounded-[10px]
@@ -41,6 +70,8 @@ const Estimate = () => {
                         {/* Phone */}
                         <input
                             type="text"
+                            value={form.phone}
+                            onChange={(e) => setForm({ ...form, phone: e.target.value })}
                             placeholder="Enter Your Phone Number"
                             className="text-[14px] sm:text-[16px] py-[8px] px-[20px]
                             border border-gray-300 rounded-[10px]
@@ -57,6 +88,7 @@ const Estimate = () => {
                                 hover:border-blue-400 transition"
                             >
                                 {value || "Select Your City"}
+
                             </div>
 
                             {open && (
@@ -121,6 +153,8 @@ const Estimate = () => {
 
                         {/* Message */}
                         <textarea
+                            value={form.message}
+                            onChange={(e) => setForm({ ...form, message: e.target.value })}
                             placeholder="Why Do You Want To Partner With Us"
                             className="text-[14px] sm:text-[16px]
                             py-[8px] px-[20px] h-[120px]
@@ -134,7 +168,9 @@ const Estimate = () => {
                             Meeransh Infra's privacy policy
                         </p>
 
-                        <button className='w-full py-[8px] bg-blue-400 font-bold sm:text-[22px] text-white rounded-[20px]'>
+                        <button className='w-full py-[8px] bg-blue-400 font-bold sm:text-[22px] text-white rounded-[20px]'
+                            onClick={(e) => handleSubmit}
+                        >
                             Join Now
                         </button>
                     </div>
