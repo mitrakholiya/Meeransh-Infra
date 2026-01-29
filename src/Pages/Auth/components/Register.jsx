@@ -10,9 +10,8 @@ const Register = ({ change, onclick }) => {
   const { error, loading, register } = useAuth();
 
   const registerHandel = async () => {
-    e.preventDefault();
     const res = await register(form);
-    console.log(res);
+    
     
   };
 
