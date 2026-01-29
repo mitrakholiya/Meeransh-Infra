@@ -11,3 +11,12 @@ export const postContact = (data) => {
 export const deleteContact = (id)=>{
     return axiosClient.delete(`/contact/${id}`)
 }
+
+// estimate
+export const postEstimate = (data) =>{
+    return axiosClient.post(`/estimate`,data) 
+}
+
+export const getEstimate = ()=>{
+    return axiosClient.get("/estimate")
+}

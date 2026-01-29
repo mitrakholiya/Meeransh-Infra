@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getContact, postContact,deleteContact } from "../services/contact"
+import { getContact, postContact, deleteContact, postEstimate, getEstimate } from "../services/contact"
 
 const useContact = () => {
     const [loading, setLoading] = useState(false);
@@ -20,7 +20,7 @@ const useContact = () => {
             setLoading(false)
         }
     }
-// Add
+    // Add
     const PostContact = async (data) => {
         setLoading(true);
         setError(null);
@@ -35,14 +35,44 @@ const useContact = () => {
     };
 
     // Delete
-    const DeleteContact = async (id)=>{
-        const res = deleteContact(id)
+    const DeleteContact = async (id) => {
+        const res = await deleteContact(id)
         return res.data
     }
-    return{
+
+    const PostEstimate = async (data) => {
+        setLoading(true)
+        try {
+            const res = await postEstimate(data)
+            return res.data
+        } catch (err) {
+            setError(err.response?.data?.message || "Post Estimate Error");
+        } finally {
+            setLoading(false)
+        }
+    }
+
+    // Get Estimate
+
+    const GetEstimate = async () => {
+        setLoading(true)
+        try {
+            const res = await getEstimate()
+            return res.data
+        } catch (err) {
+            setError(err.response?.data?.message || "Post Estimate Error");
+        } finally {
+            setLoading(false)
+        }
+    }
+
+
+    return {
         GetContact,
         PostContact,
         DeleteContact,
+        PostEstimate,
+        GetEstimate,
         loading,
         error
     }
