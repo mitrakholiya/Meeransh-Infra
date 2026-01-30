@@ -14,6 +14,7 @@ import AddBlog from './Pages/Dashboard/modules/AddBlog';
 import ViewContect from './Pages/Dashboard/modules/ViewContect';
 
 import { Toaster } from "react-hot-toast";
+import PublicRoute from './routes/PublicRoute';
 
 function App() {
   const [count, setCount] = useState(0);
