@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import useContact from "../../../hooks/useContact"
 import { FiDownload, FiTrash2, FiClipboard, FiMapPin } from "react-icons/fi"
 import { copyToClipboard } from "../../../utils/toast" // your toast copy utility
+import Loader from "../Loader"  
 
 const ViewEstimate = () => {
   const { loading, GetEstimate, DeleteEstimate } = useContact()
@@ -40,7 +41,7 @@ const BASE_URL = import.meta.env.CLOUDINARY_CLOUD_URL;
   }
 
   if (loading) {
-    return <p className="text-center text-gray-500">Loading...</p>
+    return <Loader/>
   }
 
   return (

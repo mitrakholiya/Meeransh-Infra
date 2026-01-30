@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react"
 import useContact from "../../../hooks/useContact"
 import { copyToClipboard } from "../../../utils/toast"
 import { FiClipboard, FiMapPin, FiTrash2 } from "react-icons/fi"
-
+import Loader from "../Loader"
+  
 const ViewContect = () => {
   const { GetContact, loding, DeleteContact } = useContact()
   const [contact, setContact] = useState([])
   // const [refrace, setRefrace] = useState(1)
   useEffect(() => {
-
+    if (loding) return
     const fetchContact = async () => {
       const res = await GetContact()
       setContact(res.data)
@@ -26,8 +27,8 @@ const ViewContect = () => {
   }
   return (
     <div className="p-4">
-      {loding ? (
-        <p className="text-center text-gray-500">Loading...</p>
+      {loding ?(
+        <Loader/>
       ) : (
         <>
           <h2 className="text-3xl font-bold mb-10 text-gray-800 text-center">
