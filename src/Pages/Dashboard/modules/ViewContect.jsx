@@ -3,6 +3,7 @@ import useContact from "../../../hooks/useContact"
 import { copyToClipboard } from "../../../utils/toast"
 import { FiClipboard, FiMapPin, FiTrash2 } from "react-icons/fi"
 import { Spinner } from "./Loader"
+import toast from "react-hot-toast"
 
 const ViewContect = () => {
   const { GetContact, loading, DeleteContact } = useContact()
@@ -20,11 +21,11 @@ const ViewContect = () => {
   const DeleteHandel = async (id) => {
     const res = await DeleteContact(id)
     if (res?.success) {
-      setContact(prev =>
-        toast.success("Contact deleted successfully"),
-        prev.filter(c => String(c._id) !== String(id))
-      )
-    }else{
+      toast.success("Contact deleted successfully"),
+        setContact(prev =>
+          prev.filter(c => String(c._id) !== String(id))
+        )
+    } else {
       toast.error("Contact deleted failed")
     }
   }

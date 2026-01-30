@@ -3,6 +3,7 @@ import { useState } from "react";
 import { loginApi, registerApi } from "../services/auth";
 import { useNavigate } from "react-router-dom";
 import { setRole } from "../utils/auth";
+import toast from "react-hot-toast";
 
 const useAuth = () => {
   const [loading, setLoading] = useState(false);

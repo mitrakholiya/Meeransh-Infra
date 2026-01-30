@@ -7,7 +7,7 @@ const AuthPage = () => {
     const [change, setChange] = useState(true)
     return (
         <>
-            <div className='bg-main'>
+            <div className='bg-main '>
                 <Header />
                 {
 
