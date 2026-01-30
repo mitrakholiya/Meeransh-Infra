@@ -36,12 +36,21 @@ const useContact = () => {
 
     // Delete
     const DeleteContact = async (id) => {
-        const res = await deleteContact(id)
-        return res.data
+        setLoading(true)
+        setError(null)  
+        try {
+            const res = await deleteContact(id)
+            return res.data
+        } catch (err) {
+            setError(err.response?.data?.message || "Delete Contact Error");
+        } finally {
+            setLoading(false)
+        }
     }
 
     const PostEstimate = async (data) => {
         setLoading(true)
+        setError(null)  
         try {
             const res = await postEstimate(data)
             return res.data
@@ -67,8 +76,16 @@ const useContact = () => {
     }
 
     const DeleteEstimate = async (id) => {
-        const res = await deleteEstimate(id)
-        return res.data
+        setLoading(true)
+        setError(null)  
+        try {
+            const res = await deleteEstimate(id)
+            return res.data
+        } catch (err) {
+            setError(err.response?.data?.message || "Delete Estimate Error");
+        } finally {
+            setLoading(false)
+        }
     }
 
     return {

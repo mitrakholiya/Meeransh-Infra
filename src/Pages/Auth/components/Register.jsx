@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import useAuth from '../../../hooks/useAuth';
+import { Spinner } from '../../Dashboard/modules/Loader'
 
 const Register = ({ change, onclick }) => {
   const [form, setForm] = useState({
@@ -15,6 +16,11 @@ const Register = ({ change, onclick }) => {
     
     
   };
+  if(loading) return (
+    <div className="flex items-center justify-center h-screen">
+      <Spinner className="size-8 text-purple-500" />
+    </div>
+  )
 
   return (
    <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">

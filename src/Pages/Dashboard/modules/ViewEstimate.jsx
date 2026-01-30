@@ -36,7 +36,10 @@ const ViewEstimate = () => {
   const DeleteHandel = async (id) => {
     const res = await DeleteEstimate(id)
     if (res?.success) {
+      toast.success("Estimate deleted successfully")
       setEstimate(prev => prev.filter(c => String(c._id) !== String(id)))
+    }else{
+      toast.error("Estimate deleted failed")
     }
   }
 
@@ -52,7 +55,7 @@ const ViewEstimate = () => {
         Estimates
       </h2>
 
-      <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-4 sm:gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {estimate?.map((e) => (
           <div
             key={e._id}

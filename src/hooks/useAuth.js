@@ -20,8 +20,10 @@ const useAuth = () => {
       setRole(res.data.admin.role)
 
       // setUser(res.data.user);
+      toast.success("Login successful");  
       navigate("/dashboard"); // redirect after login
     } catch (err) {
+      toast.error("Login failed");
       setError(err.response?.data?.message || "Login failed");
     } finally {
       setLoading(false);
@@ -35,10 +37,12 @@ const useAuth = () => {
     try {
       const res = await registerApi(data);
       localStorage.setItem("token", res.data.token);
+      toast.success("Registration successful");
       // setUser(res.data.user);
       setRole(res.data.admin.role)
       navigate("/dashboard"); // redirect after registration
     } catch (err) {
+      toast.error("Registration failed");
       setError(err.response?.data?.message || "Registration failed");
     } finally {
       setLoading(false);
