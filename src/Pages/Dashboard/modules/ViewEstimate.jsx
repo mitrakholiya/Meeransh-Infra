@@ -15,12 +15,14 @@ const ViewEstimate = () => {
     fetchEstimate()
   }, [])
 
-const BASE_URL = import.meta.env.VITE_URL_KEY;
+const BASE_URL = import.meta.env.CLOUDINARY_CLOUD_URL;
 
   // Download file handler
   const handleDownload = (fileName) => {
     if (!fileName) return
-    const fileUrl = `${BASE_URL}/uploads/${fileName}`
+
+    
+    const fileUrl = `${BASE_URL}/${fileName}`
     const link = document.createElement("a")
     link.href = fileUrl
     link.download = fileName

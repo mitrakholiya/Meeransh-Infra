@@ -11,7 +11,9 @@ const Header = () => {
     return (
         <div className="w-full bg-[#00000057] sticky top-0 z-[20]">
             <div className="container mx-auto h-[70px] px-[5%]  flex items-center justify-between" >
+               <Link to="/">
                 <img src="/LOGO.png" alt="" className='h-[60px]' />
+               </Link>
                 <div >
                     {!isOpen ? (<>
                         <div className="flex items-center sm:gap-9 gap-2.5">
