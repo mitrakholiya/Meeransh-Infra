@@ -26,7 +26,9 @@ function App() {
         <Route path="/contact" element={<ContactPage />} />
         <Route path='/blog' element={<Blog />} />
         <Route path="/build" element={<Build />} />
-        <Route path="/login" element={<AuthPage />} />
+        <Route element={<PublicRoute />}>
+          <Route path="/login" element={<AuthPage />} />
+        </Route>
 
         <Route element={<ProtectedRoute />}>
           <Route path='/dashboard' element={<Dashboard />}>

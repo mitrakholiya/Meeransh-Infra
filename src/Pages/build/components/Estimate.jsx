@@ -28,11 +28,12 @@ const Estimate = () => {
         formData.append("phone", form.phone);
         formData.append("city", value);
         formData.append("message", form.message);
-        formData.append("file", file); 
+        formData.append("file", file);
         console.log(formData);
 
         const res = await PostEstimate(formData)
         if (res?.success) {
+            toast.success("Thank you for Showing Interest!")
             setForm({
                 name: "",
                 email: "",

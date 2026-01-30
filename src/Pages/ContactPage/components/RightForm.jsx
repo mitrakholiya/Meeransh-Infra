@@ -19,7 +19,7 @@ const RightForm = () => {
 
     const handleSubmit = async () => {
         const res = await PostContact(form)
-        console.log(res)
+        toast.success("Thank you for Showing Interest!")
         setForm({
             name: "",
             email: "",
