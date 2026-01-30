@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import useContact from '../../../hooks/useContact';
 import toast from 'react-hot-toast';
+import { Spinner } from '../../Dashboard/modules/Loader';
 
 const Estimate = () => {
     const cities = ["Surat", "Bharuch", "Ankleshwar", "Navsari"];
 
-    const { PostEstimate } = useContact()
+    const { PostEstimate, loading } = useContact()
 
 
     const [open, setOpen] = useState(false);
@@ -21,6 +22,10 @@ const Estimate = () => {
         message: "",
     })
     const handleSubmit = async () => {
+        if (form.phone.length !== 10) {
+            toast.error("Phone number must be exactly 10 digits");
+            return;
+        }
 
 
         const formData = new FormData();
@@ -47,6 +52,11 @@ const Estimate = () => {
         }
     };
 
+    if (loading) return (
+        <div className="flex items-center justify-center h-screen">
+            <Spinner className="size-8 text-purple-500" />
+        </div>
+    )
 
     return (
         <>
@@ -84,14 +94,22 @@ const Estimate = () => {
 
                         {/* Phone */}
                         <input
-                            type="text"
+                            type="tel"
                             value={form.phone}
-                            onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                            onChange={(e) => {
+                                const value = e.target.value;
+
+                                // allow only numbers & max 10 digits
+                                if (/^\d{0,10}$/.test(value)) {
+                                    setForm({ ...form, phone: value });
+                                }
+                            }}
                             placeholder="Enter Your Phone Number"
                             className="text-[14px] sm:text-[16px] py-[8px] px-[20px]
-                            border border-gray-300 rounded-[10px]
-                            focus:border-blue-400 focus:bg-blue-50
-                            focus:outline-none transition"
+    border border-gray-300 rounded-[10px]
+    focus:border-blue-400 focus:bg-blue-50
+    focus:outline-none transition"
+                            required
                         />
 
                         {/* Custom City Dropdown */}

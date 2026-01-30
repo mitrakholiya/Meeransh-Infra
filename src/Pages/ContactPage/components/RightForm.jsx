@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import useContact from '../../../hooks/useContact';
 import toast from 'react-hot-toast';
+import { Spinner } from '../../Dashboard/modules/Loader';
 const RightForm = () => {
 
     const cities = ["Surat", "Bharuch", "Ankleshwar", "Navsari"];
@@ -19,6 +20,11 @@ const RightForm = () => {
     })
 
     const handleSubmit = async () => {
+        if (form.phone.length !== 10) {
+            toast.error("Phone number must be exactly 10 digits");
+            return;
+        }
+
         const res = await PostContact(form)
         toast.success("Thank you for Showing Interest!")
         setForm({
@@ -31,7 +37,11 @@ const RightForm = () => {
         setValue("")
 
     }
-
+    if (loading) return (
+        <div className="flex items-center justify-center h-screen">
+            <Spinner className="size-8 text-purple-500" />
+        </div>
+    )
     return (
         <div className='md:w-[50%] w-[100%]   text-[#151515] px-[20px] mb-[60px]    '>
             <div className="border-[1px] border-[#545454] p-[20px] rounded-4xl">
@@ -51,7 +61,7 @@ const RightForm = () => {
 
                     {/* Email */}
                     <input
-                        type="text"
+                        type="email"
                         value={form.email}
                         onChange={(e) => setForm({ ...form, email: e.target.value })}
                         placeholder="Enter Your Email"
@@ -63,14 +73,22 @@ const RightForm = () => {
 
                     {/* Phone */}
                     <input
-                        type="text"
+                        type="tel"
                         value={form.phone}
-                        onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                        onChange={(e) => {
+                            const value = e.target.value;
+
+                            // allow only numbers & max 10 digits
+                            if (/^\d{0,10}$/.test(value)) {
+                                setForm({ ...form, phone: value });
+                            }
+                        }}
                         placeholder="Enter Your Phone Number"
                         className="text-[14px] sm:text-[16px] py-[8px] px-[20px]
-                            border border-gray-300 rounded-[10px]
-                            focus:border-blue-400 focus:bg-blue-50
-                            focus:outline-none transition"
+    border border-gray-300 rounded-[10px]
+    focus:border-blue-400 focus:bg-blue-50
+    focus:outline-none transition"
+                        required
                     />
 
                     {/* Custom City Dropdown */}
