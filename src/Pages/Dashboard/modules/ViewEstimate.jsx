@@ -17,14 +17,14 @@ const ViewEstimate = () => {
     fetchEstimate()
   }, [])
 
-  const BASE_URL = import.meta.env.VITE_CLOUDINARY_CLOUD_URL;
+  // const BASE_URL = import.meta.env.VITE_CLOUDINARY_CLOUD_URL;
 
   // Download file handler
   const handleDownload = (fileName) => {
     if (!fileName) return
 
 
-    const fileUrl = `${BASE_URL}/${fileName}`
+    // const fileUrl = `${BASE_URL}/${fileName}`
     const link = document.createElement("a")
     link.href = fileUrl
     link.download = fileName
@@ -109,10 +109,10 @@ const ViewEstimate = () => {
             </div>
 
             {/* File Download */}
-            {e.file && (
+            {e.fileUrl && (
               <button
                 className="mt-2 flex items-center gap-2 text-sm text-white bg-purple-500 px-3 py-1 rounded hover:bg-purple-600 transition w-fit"
-                onClick={() => handleDownload(e.file)}
+                onClick={() => handleDownload(e.fileUrl)}
               >
                 <FiDownload size={16} />
                 Download File
