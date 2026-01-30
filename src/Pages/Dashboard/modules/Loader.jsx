@@ -1,8 +1,8 @@
 import { LoaderIcon } from "lucide-react"
 
-import { cn } from "@/lib/utils"
+    import { cn } from "../../../lib/utils"
 
-function Spinner({ className, ...props }) {
+export function Spinner({ className, ...props }) {
   return (
     <LoaderIcon
       role="status"

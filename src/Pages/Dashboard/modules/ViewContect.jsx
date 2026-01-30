@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import useContact from "../../../hooks/useContact"
 import { copyToClipboard } from "../../../utils/toast"
 import { FiClipboard, FiMapPin, FiTrash2 } from "react-icons/fi"
-import Loader from "./Loader"
+import {Spinner} from "./Loader"
 
 const ViewContect = () => {
   const { GetContact, loding, DeleteContact } = useContact()
@@ -28,7 +28,7 @@ const ViewContect = () => {
   return (
     <div className="p-4">
       {loding ?(
-        <Loader/>
+        <Spinner/>
       ) : (
         <>
           <h2 className="text-3xl font-bold mb-10 text-gray-800 text-center">

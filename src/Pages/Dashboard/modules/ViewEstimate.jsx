@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import useContact from "../../../hooks/useContact"
 import { FiDownload, FiTrash2, FiClipboard, FiMapPin } from "react-icons/fi"
 import { copyToClipboard } from "../../../utils/toast" // your toast copy utility
-import Loader from "./Loader"  
+import {Spinner} from "./Loader"
 
 const ViewEstimate = () => {
   const { loading, GetEstimate, DeleteEstimate } = useContact()
@@ -16,13 +16,13 @@ const ViewEstimate = () => {
     fetchEstimate()
   }, [])
 
-const BASE_URL = import.meta.env.VITE_CLOUDINARY_CLOUD_URL;
+  const BASE_URL = import.meta.env.VITE_CLOUDINARY_CLOUD_URL;
 
   // Download file handler
   const handleDownload = (fileName) => {
     if (!fileName) return
 
-    
+
     const fileUrl = `${BASE_URL}/${fileName}`
     const link = document.createElement("a")
     link.href = fileUrl
@@ -40,9 +40,11 @@ const BASE_URL = import.meta.env.VITE_CLOUDINARY_CLOUD_URL;
     }
   }
 
-  if (loading) {
-    return <Loader/>
-  }
+  if (loading) return (
+    <div className="flex items-center justify-center h-screen">
+      <Spinner className="size-8 text-purple-500" />
+    </div>
+  )
 
   return (
     <div className="p-4">
