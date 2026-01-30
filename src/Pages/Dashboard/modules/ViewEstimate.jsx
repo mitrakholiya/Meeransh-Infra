@@ -16,7 +16,7 @@ const ViewEstimate = () => {
     fetchEstimate()
   }, [])
 
-const BASE_URL = import.meta.env.CLOUDINARY_CLOUD_URL;
+const BASE_URL = import.meta.env.VITE_CLOUDINARY_CLOUD_URL;
 
   // Download file handler
   const handleDownload = (fileName) => {
