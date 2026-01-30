@@ -20,3 +20,7 @@ export const postEstimate = (data) =>{
 export const getEstimate = ()=>{
     return axiosClient.get("/estimate")
 }
+
+export const deleteEstimate = (id)=>{
+    return axiosClient.delete(`/estimate/${id}`)
+}

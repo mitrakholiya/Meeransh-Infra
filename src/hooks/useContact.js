@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getContact, postContact, deleteContact, postEstimate, getEstimate } from "../services/contact"
+import { getContact, postContact, deleteContact, postEstimate, getEstimate,deleteEstimate} from "../services/contact"
 
 const useContact = () => {
     const [loading, setLoading] = useState(false);
@@ -66,6 +66,10 @@ const useContact = () => {
         }
     }
 
+    const DeleteEstimate = async (id) => {
+        const res = await deleteEstimate(id)
+        return res.data
+    }
 
     return {
         GetContact,
@@ -73,6 +77,7 @@ const useContact = () => {
         DeleteContact,
         PostEstimate,
         GetEstimate,
+        DeleteEstimate,
         loading,
         error
     }
