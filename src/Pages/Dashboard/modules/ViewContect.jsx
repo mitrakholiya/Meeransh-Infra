@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react"
 import useContact from "../../../hooks/useContact"
 import { copyToClipboard } from "../../../utils/toast"
 import { FiClipboard, FiMapPin, FiTrash2 } from "react-icons/fi"
-import Loader from "../Loader"
-  
+import Loader from "./Loader"
+
 const ViewContect = () => {
   const { GetContact, loding, DeleteContact } = useContact()
   const [contact, setContact] = useState([])
